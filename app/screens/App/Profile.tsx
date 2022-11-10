@@ -2,19 +2,15 @@ import { View } from 'react-native';
 
 import { Photos, Posts, ProfileHeader } from './Components';
 
-import {
-  Container,
-  Divider,
-  Header,
-  Text,
-  TopTab,
-  VirtualScroll,
-} from 'components';
+import { Container, Header, Text, TopTab, VirtualScroll } from 'components';
 import { layout, pallets } from 'constant';
+import { setAuthenticated, useDispatch } from 'store';
 
 const { fonts } = layout;
 
 export default function Profile(): JSX.Element {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Header
@@ -23,7 +19,7 @@ export default function Profile(): JSX.Element {
         rightLabel="Logout"
         backgroundColor={pallets.primary}
         onLeftLabelPress={() => console.log('Pressed')}
-        onRightLabelPress={() => console.log('Logout')}
+        onRightLabelPress={() => dispatch(setAuthenticated(false))}
         itemColor={pallets.white}
       />
       <VirtualScroll bounces={false} listKey="0">
@@ -60,7 +56,6 @@ export default function Profile(): JSX.Element {
               renderItem: ({ item }) => <View>{item}</View>,
             }}
           />
-          <Divider />
         </Container>
       </VirtualScroll>
     </>

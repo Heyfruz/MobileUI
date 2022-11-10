@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 import {
   Button,
   Container,
-  Divider,
   Footer,
   Form,
   FormField,
@@ -34,7 +33,7 @@ export default function Login(): JSX.Element {
             console.log(values);
             dispatch(setAuthenticated(true));
           }}>
-          <Divider />
+          <View style={{ height: 32 }} />
           <FormField
             placeholder="Email"
             name="email"
@@ -58,7 +57,6 @@ export default function Login(): JSX.Element {
           />
           <Footer>
             <Submit label="Login" />
-            <Divider space="t" />
             <Button variant="transparent" label="Forgot your password?" />
           </Footer>
         </Form>

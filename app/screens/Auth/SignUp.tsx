@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 import {
   Button,
   Container,
-  Divider,
   Footer,
   Form,
   FormCheck,
@@ -46,7 +45,7 @@ export default function SignUp({
             console.log(values);
             dispatch(setAuthenticated(true));
           }}>
-          <Divider />
+          <View style={{ height: 32 }} />
           <FormField
             name="name"
             placeholder="Name"
@@ -78,14 +77,13 @@ export default function SignUp({
               setSecure(sec => !sec);
             }}
           />
-          <Divider space="s" />
+          <View style={{ height: 32 }} />
           <FormCheck
             name="promotion"
             label="I would like to receive your newsletter and other promotional information."
           />
           <Footer>
             <Submit label="Sign Up" />
-            <Divider space="t" />
             <Button variant="transparent" label="Forgot your password?" />
           </Footer>
         </Form>

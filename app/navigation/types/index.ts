@@ -39,8 +39,3 @@ export type AuthRoutes = {
   Login: undefined;
   SignUp: undefined;
 };
-
-export type TabTabRoutes = {
-  Posts: undefined;
-  Photos: undefined;
-};

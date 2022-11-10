@@ -16,8 +16,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import Divider from '../Divider';
-
 import { layout, pallets } from 'constant';
 
 const { spacing, fonts } = layout;
@@ -105,8 +103,6 @@ export default function TopTabSection<T>({
         {sectionHeading.length > 0 && (
           <View style={[styles.header]}>
             {sectionHeading.map((item, index) => {
-              const last = index === sectionHeading.length - 1;
-
               return (
                 <Pressable
                   key={item}
@@ -116,7 +112,6 @@ export default function TopTabSection<T>({
                   }}
                   style={{
                     borderColor: pallets.border,
-                    borderRightWidth: last ? 0 : 1,
                     height: 20,
                     justifyContent: 'center',
                     width: listWidth / (sectionHeading.length || 1),
@@ -152,16 +147,14 @@ export default function TopTabSection<T>({
             listKey="key-3"
             showsVerticalScrollIndicator={false}
             initialNumToRender={5}
-            // scrollEnabled={false}
             ListEmptyComponent={<View />}
-            ItemSeparatorComponent={() => <Divider space="s" />}
+            ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
             contentContainerStyle={{ paddingVertical: spacing.s }}
             {...flatListProps}
           />
         )}
         keyExtractor={(_, index) => index.toString()}
         horizontal={true}
-        // disableIntervalMomentum={true}
       />
     </Animated.View>
   );
@@ -185,7 +178,6 @@ const AnimatedHeaderText = ({
         scrollOffset.value,
         [(index - 1) * listWidth, index * listWidth, (index + 1) * listWidth],
         [pallets.grey3, pallets.primary, pallets.grey3],
-        //Todo: Replace color literal with values from theme object
       ),
     }),
     [listWidth],
@@ -243,3 +235,8 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
 });
+
+//This is a very complicated solution for a very simple task. I think part of the problem or the reason why this component was used was that
+//Initial trial with React-Navigation-Material-Top-Tab turned out to be not so efficient as needed
+
+//This solution is not yet perfect, there're multiple solution to solve this problem which includes creating a custom scrollview which may not be explored at the moment because of time

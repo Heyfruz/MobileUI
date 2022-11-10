@@ -45,7 +45,7 @@ function Footer({
         },
       ]}>
       {children}
-      <View style={{ height: 20 }} />
+      <View style={{ height: 32 }} />
     </View>
   );
 }
