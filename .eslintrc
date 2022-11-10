@@ -13,7 +13,8 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "@react-native-community"
+    "@react-native-community",
+    "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -23,7 +24,13 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-native", "import"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "react-native",
+    "import",
+    "prettier"
+  ],
   "rules": {
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
@@ -66,7 +73,8 @@
     "react-native/no-single-element-style-arrays": 0,
     "react/no-unescaped-entities": 0,
     "import/order": [1, { "newlines-between": "always" }],
-    "import/namespace": [0, { "allowComputed": false }]
+    "import/namespace": [0, { "allowComputed": false }],
+    "react/no-unstable-nested-components": [0, { "allowAsProps": true }]
   },
   "settings": {
     "import/resolver": {
