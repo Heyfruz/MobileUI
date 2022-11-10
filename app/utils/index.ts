@@ -17,4 +17,13 @@ export const getTabIcon = (
   }
 };
 
+export const getTotalAmount = (
+  accumulator: number,
+  a: number,
+  _currentIndex: number,
+  _array: number[],
+): number => {
+  return accumulator + a;
+};
+
 export * from './validation';
