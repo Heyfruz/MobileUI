@@ -10,13 +10,26 @@ import { Icon } from 'assets';
 const { fonts, spacing } = layout;
 
 interface Props {
-  title: string;
-  showCloseIcon?: boolean;
+  backgroundColor?: string;
   handleCloseIcon?: () => void;
-  leftLabel?: string;
-  rightLabel?: string;
-  onRightLabelPress?: () => void;
   hideLeftComp?: boolean;
+  itemColor?: string;
+  leftLabel?: string;
+  onLeftLabelPress?: () => void;
+  onRightLabelPress?: () => void;
+  rightLabel?: string;
+  showCloseIcon?: boolean;
+  title: string;
+}
+
+type ExtendProps = Omit<
+  Props,
+  'title' | 'backgroundColor' | 'rightLabel' | 'onRightLabelPress'
+>;
+
+interface BackProps extends ExtendProps {
+  canGoBack: boolean;
+  handleBack: () => void;
 }
 
 export default function Header({
@@ -25,7 +38,10 @@ export default function Header({
   handleCloseIcon,
   leftLabel,
   hideLeftComp,
+  itemColor,
   rightLabel,
+  onLeftLabelPress,
+  backgroundColor,
   onRightLabelPress,
 }: Props): JSX.Element {
   const { insets, headerHeight } = useHeaderHeight();
@@ -36,11 +52,12 @@ export default function Header({
 
   return (
     <>
-      <View style={{ height: insets.top }} />
+      <View style={{ backgroundColor, height: insets.top }} />
       <View
         style={[
           styles.header,
           {
+            backgroundColor,
             height: headerHeight - insets.top,
             paddingHorizontal: spacing.padding,
           },
@@ -52,7 +69,9 @@ export default function Header({
               handleBack,
               handleCloseIcon,
               hideLeftComp,
+              itemColor,
               leftLabel,
+              onLeftLabelPress,
               showCloseIcon,
             }}
           />
@@ -61,14 +80,14 @@ export default function Header({
               <Text
                 variant="medium"
                 size={fonts.subhead}
-                color={pallets.primary}>
+                color={itemColor || pallets.primary}>
                 {rightLabel || 'Go'}
               </Text>
             </TouchableOpacity>
           )}
         </View>
         <View style={styles.titleBox}>
-          <Text variant="semiBold" size={fonts.title1}>
+          <Text variant="semiBold" size={fonts.title1} color={itemColor}>
             {title}
           </Text>
         </View>
@@ -77,30 +96,37 @@ export default function Header({
   );
 }
 
-interface BackProps {
-  canGoBack: boolean;
-  showCloseIcon?: boolean;
-  handleBack: () => void;
-  handleCloseIcon?: () => void;
-  leftLabel?: string;
-  hideLeftComp?: boolean;
-}
-
 const Back = ({
   canGoBack,
   handleBack,
   hideLeftComp,
   showCloseIcon,
   handleCloseIcon,
+  itemColor,
+  onLeftLabelPress,
   leftLabel,
 }: BackProps): JSX.Element => {
   switch (true) {
     case hideLeftComp:
       return <View />;
+    case Boolean(leftLabel):
+      return (
+        <TouchableOpacity activeOpacity={0.7} onPress={onLeftLabelPress}>
+          <Text
+            variant="medium"
+            size={fonts.subhead}
+            color={itemColor || pallets.primary}>
+            {leftLabel}
+          </Text>
+        </TouchableOpacity>
+      );
     case canGoBack && !showCloseIcon:
       return (
         <TouchableOpacity activeOpacity={0.7} onPress={handleBack}>
-          <Text variant="medium" size={fonts.subhead} color={pallets.primary}>
+          <Text
+            variant="medium"
+            size={fonts.subhead}
+            color={itemColor || pallets.primary}>
             {leftLabel || 'Back'}
           </Text>
         </TouchableOpacity>

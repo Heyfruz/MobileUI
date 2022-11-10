@@ -1,5 +1,6 @@
 import React, { memo, useMemo } from 'react';
-import { FlatList, FlatListProps } from 'react-native';
+import { FlatListProps } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
 const emptyData: [] = [];
 const renderNullItem = () => null;

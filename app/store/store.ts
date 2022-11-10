@@ -17,7 +17,7 @@ const persistConfig = {
   key: 'root',
   storage: reduxStorage,
   version: 1,
-  whitelist: ['persisted'],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

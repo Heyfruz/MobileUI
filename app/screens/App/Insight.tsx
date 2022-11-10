@@ -16,7 +16,7 @@ import { getTotalAmount } from 'utils';
 const { fonts } = layout;
 
 const total = insightData.map(i => i.amount).reduce(getTotalAmount);
-const budget = 2500;
+const budget = 2000;
 const totalPercentage = (total / budget) * 100;
 
 const getPercentage = (amount: number): number => (amount / budget) * 100;
@@ -24,7 +24,7 @@ const getPercentage = (amount: number): number => (amount / budget) * 100;
 export default function Insight(): JSX.Element {
   return (
     <>
-      <Header title="Insight" />
+      <Header title="Insight" hideLeftComp />
       <VirtualScroll>
         <Container>
           <View style={styles.insight}>
@@ -41,7 +41,6 @@ export default function Insight(): JSX.Element {
             )}
             ListHeaderComponent={<View style={{ height: 16 }} />}
             renderItem={({ item, index }) => {
-              console.log(index % 2);
               return (
                 <InsightCard
                   label={item.label}

@@ -27,3 +27,4 @@ export const getTotalAmount = (
 };
 
 export * from './validation';
+export * from './formatDate';
